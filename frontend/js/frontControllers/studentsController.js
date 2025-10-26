@@ -31,6 +31,11 @@ function setupFormHandler()
     {
         e.preventDefault();
         const student = getFormData();
+
+        if (student.age < 18) {
+            showError("Error de Validación", "La edad del estudiante debe ser mayor o igual a 18 años.");
+            return;
+        }
     
         try 
         {
