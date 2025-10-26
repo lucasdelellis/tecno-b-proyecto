@@ -189,4 +189,31 @@ async function confirmDelete(id)
         console.error('Error al borrar:', err.message);
     }
 }
-  
+
+function showError(title, description) {
+    clearError();
+
+    const errorAlert = document.getElementById("errorAlert");
+
+    const closeElement = document.createElement("button");
+    closeElement.textContent = "x";
+    closeElement.className = "w3-button w3-large w3-display-topright"
+    closeElement.addEventListener('click', clearError);
+    errorAlert.appendChild(closeElement);
+
+    const titleElement = document.createElement("h3");
+    titleElement.textContent = title;
+    errorAlert.appendChild(titleElement);
+
+    const descriptionElement = document.createElement("p");
+    descriptionElement.textContent = description;
+    errorAlert.appendChild(descriptionElement);
+
+    errorAlert.style.display = 'block';
+}
+
+function clearError() {
+    const errorAlert = document.getElementById("errorAlert");
+    errorAlert.replaceChildren();
+    errorAlert.style.display = 'none';
+}
