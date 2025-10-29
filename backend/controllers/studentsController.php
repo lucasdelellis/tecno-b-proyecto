@@ -46,11 +46,11 @@ function handlePost($conn)
 {
     $input = json_decode(file_get_contents("php://input"), true);
 
-    if ($input['age'] < 18) 
-    {
+    if ($input['age'] < 18) {
         http_response_code(400);
-        echo json_encode(["error" => "La edad del estudiante debe ser mayor o igual a 18 años."]);
-    } 
+        echo json_encode(["error" => "La edad debe ser mayor o igual a 18"]);
+        return;
+    }
 
     $result = createStudent($conn, $input['fullname'], $input['email'], $input['age']);
     if ($result['inserted'] > 0) 
@@ -67,6 +67,12 @@ function handlePost($conn)
 function handlePut($conn) 
 {
     $input = json_decode(file_get_contents("php://input"), true);
+    
+    if ($input['age'] < 18) {
+        http_response_code(400);
+        echo json_encode(["error" => "La edad debe ser mayor o igual a 18"]);
+        return;
+    }
 
     if ($input['age'] < 18) 
     {
